@@ -13,18 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class BookingController extends AbstractController
 {
     private $createBookingUseCase;
-    private $userRepository;
-    private $vehicleRepository;
+
     public function __construct(
         CreateBookingUseCase $createBookingUseCase,
-        UserRepository $userRepository,
-        VehicleRepository $vehicleRepository
     ) {
         $this->createBookingUseCase = $createBookingUseCase;
-        $this->userRepository = $userRepository;
-        $this->vehicleRepository = $vehicleRepository;
     }
-    #[Route('/booking-create', name: 'booking_create', methods: ['POST'])]
+    #[Route('/booking/create', name: 'booking_create', methods: ['POST'])]
     public function createBooking(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -38,7 +33,6 @@ final class BookingController extends AbstractController
             $endDate = new \DateTime($data['endDate']);
             $hasInsurance = filter_var($data['hasInsurance'], FILTER_VALIDATE_BOOLEAN);
             $paymentMode = $data['paymentMode'];
-            $vehicle = $this->vehicleRepository->find($data['vehicleId']);
 
             $this->createBookingUseCase->execute(
                 $startDate,

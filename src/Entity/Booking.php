@@ -81,6 +81,11 @@ class Booking
         return $price;
     }
 
+    public function updateInsuranceBooking(bool $hasInsurance)
+    {
+        $this->hasInsurance = $hasInsurance;
+    }
+
     public function payBooking()
     {
 

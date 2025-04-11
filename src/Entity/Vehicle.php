@@ -33,22 +33,35 @@ class Vehicle
     public function __construct(string $model, string $brand, float $pricePerDay)
     {
         $this->bookings = new ArrayCollection();
+        $this->validateVehicleData($model, $brand, $pricePerDay);
 
+        $this->model = $model;
+        $this->brand = $brand;
+        $this->pricePerDay = $pricePerDay;
+    }
+
+    public function updateVehicle(string $model, string $brand, float $pricePerDay)
+    {
+        $this->validateVehicleData($model, $brand, $pricePerDay);
+
+        $this->model = $model;
+        $this->brand = $brand;
+        $this->pricePerDay = $pricePerDay;
+    }
+
+    private function validateVehicleData(string $model, string $brand, float $pricePerDay): void
+    {
         if (empty($model)) {
             throw new \InvalidArgumentException('Model is required.');
         }
 
         if (empty($brand)) {
-            throw new \InvalidArgumentException('Brand is required');
+            throw new \InvalidArgumentException('Brand is required.');
         }
 
         if ($pricePerDay <= 0) {
             throw new \InvalidArgumentException('Price must be greater than 0.');
         }
-
-        $this->model = $model;
-        $this->brand = $brand;
-        $this->pricePerDay = $pricePerDay;
     }
 
     public function getId(): ?int

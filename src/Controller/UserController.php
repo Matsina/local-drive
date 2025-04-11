@@ -18,7 +18,7 @@ final class UserController extends AbstractController
         $this->createUserUseCase = $createUserUseCase;
     }
 
-    #[Route('/user-create', name: 'user_create', methods: ['POST'])]
+    #[Route('/user/create', name: 'user_create', methods: ['POST'])]
     public function createUser(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
