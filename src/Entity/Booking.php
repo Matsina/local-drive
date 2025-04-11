@@ -64,10 +64,10 @@ class Booking
         $this->endDate = $endDate;
         $this->hasInsurance = $hasInsurance;
         $this->paymentMode = $paymentMode;
-        $this->totalPrice = $this->bookingPrice();
         $this->customer = $customer;
         $this->vehicle = $vehicle;
         $this->status = 'CART';
+        $this->totalPrice = $this->bookingPrice();
     }
 
     public function bookingPrice(): float
